@@ -48,7 +48,7 @@
 
 
 <div formArrayName="contacts">
-  <h3>Add</h3> <button (click)="addContact()">Add Contact</button>
+  <h3>Contact</h3> <button (click)="addContact()">Add Contact</button>
 
   <div *ngFor="let contact of contacts.controls; let i=index">
     <!-- The repeated alias template -->
@@ -61,31 +61,36 @@
 
 
 
+
+
 <div formArrayName="shippingAddresses">
-  <h3>Add</h3> <button (click)="addShippingAddress()">Add Address</button>
+  <h3>Address</h3> <button (click)="addShippingAddress()">Add Address</button>
 
   <div *ngFor="let address of shippingAddress.controls; let i=index">
 
-    <div formGroupName="i" >
+    <div [formGroupName]="i" >
+
       <label>
         Address 1 :
-        <input type="text" formControlName="address1">
+        <input type="text"  formControlName="address1">
       </label>
 
       <label>
         Address 2:
-        <input type="text" formControlName="address2">
+        <input type="text"   formControlName="address2">
       </label>
 
       <label>
         Address 3:
-        <input type="text" formControlName="address3">
+        <input type="text"   formControlName="address3">
       </label>
+
       <button (click)="remove(i)">Remove</button>
     </div>
 
   </div>
 </div>
+
 
 
 <input type="submit" value="Submit" [disabled]="myForm.invalid" >

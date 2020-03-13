@@ -51,17 +51,15 @@ export class RformComponent implements OnInit {
         address : ''
       }),
 
-
-
       contacts: this.fb.array([
         {}
       ]),
 
       shippingAddresses: this.fb.array([
         this.fb.group({
-          company: '',
-          street : '',
-          address : ''
+          address1 : '',
+          address2 : '',
+          address3 : ''
         })
       ])
 
@@ -108,13 +106,13 @@ export class RformComponent implements OnInit {
 
     if (this.myForm.controls.coutntry.value=='india'){
 
-      this.myForm.controls["fname"].setValidators([Validators.required, Validators.minLength(5)])
-      this.myForm.controls["lname"].setValidators([])
-      this.myForm.controls["age"].setValidators([Validators.required, this.customAgeValidator(18) ])
+      this.myForm.get("fname").setValidators([Validators.required, Validators.minLength(5)])
+      this.myForm.get("lname").setValidators([])
+      this.myForm.get("age").setValidators([Validators.required, this.customAgeValidator(18) ])
 
-      this.myForm.controls["fname"].updateValueAndValidity()
-      this.myForm.controls["lname"].updateValueAndValidity()
-      this.myForm.controls["age"].updateValueAndValidity()
+      this.myForm.get("fname").updateValueAndValidity()
+      this.myForm.get("lname").updateValueAndValidity()
+      this.myForm.get("age").updateValueAndValidity()
 
       console.log ("India Validator applied")
 
@@ -131,7 +129,7 @@ export class RformComponent implements OnInit {
     else {
       this.myForm.controls["fname"].setValidators([])
       this.myForm.controls["lname"].setValidators([])
-      this.myForm.controls["age"].setValidators( [])
+      this.myForm.controls["age"].setValidators([])
 
       this.myForm.controls["fname"].updateValueAndValidity()
       this.myForm.controls["lname"].updateValueAndValidity()
@@ -143,6 +141,6 @@ export class RformComponent implements OnInit {
 
 
   remove(i){
-    this.shippingAddress.removeAt(i)
+    this.shippingAddress.removeAt(i);
   }
 }
