@@ -1,0 +1,94 @@
+<p>rform works!</p>
+<form [formGroup]="myForm" (ngSubmit)="submitData()">
+  <select formControlName='coutntry' (change)="countyChaged()">
+    <option *ngFor="let item of countries" [ngValue]="item">
+        {{item}}
+    </option>
+  </select>
+  <input type="text" formControlName="fname">
+  <input type="text" formControlName="lname">
+  <input type="text" formControlName="age">
+
+
+  <select  formControlName="addressType" >
+    <option [ngValue]="null" disabled>Choose your Address</option>
+    <option *ngFor="let type of addressTypes" [ngValue]="type">
+     {{ type }}
+    </option>
+  </select>
+
+  <div formGroupName="homeAddress" *ngIf="isHome()" >
+    Home Address
+  <label>
+    Street:
+    <input type="text" formControlName="street">
+  </label>
+  <label>
+    City:
+    <input type="text" formControlName="address">
+  </label>
+</div>
+
+<div formGroupName="businessAddress" *ngIf="isOffice()">
+  <label>
+    Company:
+    <input type="text" formControlName="company">
+  </label>
+  <label>
+    Street:
+    <input type="text" formControlName="street">
+  </label>
+
+  <label>
+    City:
+    <input type="text" formControlName="address">
+  </label>
+
+</div>
+
+
+<div formArrayName="contacts">
+  <h3>Add</h3> <button (click)="addContact()">Add Contact</button>
+
+  <div *ngFor="let contact of contacts.controls; let i=index">
+    <!-- The repeated alias template -->
+    <label>
+      Contact:
+      <input type="text" [formControlName]="i">
+    </label>
+  </div>
+</div>
+
+
+
+<div formArrayName="shippingAddresses">
+  <h3>Add</h3> <button (click)="addShippingAddress()">Add Address</button>
+
+  <div *ngFor="let address of shippingAddress.controls; let i=index">
+
+    <div formGroupName="i" >
+      <label>
+        Address 1 :
+        <input type="text" formControlName="address1">
+      </label>
+
+      <label>
+        Address 2:
+        <input type="text" formControlName="address2">
+      </label>
+
+      <label>
+        Address 3:
+        <input type="text" formControlName="address3">
+      </label>
+      <button (click)="remove(i)">Remove</button>
+    </div>
+
+  </div>
+</div>
+
+
+<input type="submit" value="Submit" [disabled]="myForm.invalid" >
+</form>
+
+

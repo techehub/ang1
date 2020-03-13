@@ -1,0 +1,44 @@
+<p>rform works!</p>
+<form [formGroup]="myForm" (ngSubmit)="submitData()">
+  <input type="text" formControlName="fname">
+  <input type="text" formControlName="lname">
+  <input type="text" formControlName="age">
+
+  <select  formControlName="addressType" >
+    <option [ngValue]="null" disabled>Choose your Address</option>
+    <option *ngFor="let type of addressTypes" [ngValue]="type">
+     {{ type }}
+    </option>
+  </select>
+
+  <div formGroupName="homeAddress" *ngIf="isHome()" >
+    Home Address
+  <label>
+    Street:
+    <input type="text" formControlName="street">
+  </label>
+  <label>
+    City:
+    <input type="text" formControlName="address">
+  </label>
+</div>
+
+<div formGroupName="businessAddress" *ngIf="isOffice()">
+  <label>
+    Company:
+    <input type="text" formControlName="company">
+  </label>
+  <label>
+    Street:
+    <input type="text" formControlName="street">
+  </label>
+
+  <label>
+    City:
+    <input type="text" formControlName="address">
+  </label>
+
+</div>
+
+<input type="submit" value="Submit" >
+</form>

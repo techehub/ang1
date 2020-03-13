@@ -1,0 +1,34 @@
+<form #myfrom="ngForm">
+  <!--
+  Prestine -{{ myfrom.valid }} <br/>
+  Prestine -{{ myfrom.pristine }} <br/>
+Touched -{{myfrom.touched}}<br>
+Dirty - {{myfrom.dirty}}<br>
+<br/>
+-->
+
+<input type="text" name= "fname" [(ngModel)]="firstname" #f1=ngModel required minlength=4 maxlength=10 >
+<!--Valid -{{ f1.valid }}  <br/>
+Prestine -{{ f1.pristine }} <br/>
+Touched -{{f1.touched}}<br>
+Dirty - {{f1.dirty}}<br>
+<br/>
+-->
+
+<div *ngIf="f1.invalid" >
+
+  <div *ngIf="f1.errors.required" >
+       Name is required
+    </div>
+
+
+  <div *ngIf="f1.errors.minlength">
+    Name should be 4 char
+ </div>
+</div>
+
+<input type="text" name= "lname" [(ngModel)]="lastname" #f2=ngModel required pattern="[A-F]*">
+
+<button [disabled]="myfrom.invalid"> Submit </button>
+
+</form>
