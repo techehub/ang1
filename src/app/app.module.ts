@@ -7,6 +7,7 @@ import { Form1Component } from './form1/form1.component';
 import { MyformComponent } from './myform/myform.component';
 import { RformComponent } from './rform/rform.component';
 import { ProductComponent } from './product/product.component';
+import {HttpClientModule} from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { ProductComponent } from './product/product.component';
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
