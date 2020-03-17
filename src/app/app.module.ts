@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { Form1Component } from './form1/form1.component';
 import { MyformComponent } from './myform/myform.component';
 import { RformComponent } from './rform/rform.component';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     Form1Component,
     MyformComponent,
-    RformComponent
+    RformComponent,
+    ProductComponent
   ],
   imports: [
     FormsModule,

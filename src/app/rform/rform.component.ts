@@ -8,10 +8,12 @@ import { FormGroup, FormControl, Validators, ControlContainer, FormBuilder, Abst
 })
 export class RformComponent implements OnInit {
 
+  errorMessage= { 'required': "Field is Required", 'minLength':'Mininum 5 char', 'age': 'invalid age' }
+
   myForm: FormGroup ;
   constructor(private fb:FormBuilder) { }
 
-   customAgeValidator(val):ValidatorFn{
+  customAgeValidator(val):ValidatorFn{
       return function (control: FormControl): { [key: string]: boolean } | null {
       if (control.value < val){
         return {age: true}
@@ -32,10 +34,12 @@ export class RformComponent implements OnInit {
     "office"
    ]
 
-   countries =['india', 'usa', 'china']
+  countries =['india', 'usa', 'china']
 
   ngOnInit(): void {
-    this.myForm= this.fb.group ({
+
+
+  this.myForm= this.fb.group ({
       fname: '' ,
       lname: '' ,
       coutntry : '',
@@ -63,8 +67,12 @@ export class RformComponent implements OnInit {
         })
       ])
 
-
     });
+
+    this.myForm.valueChanges.subscribe((data) => {
+      this.loopCtrls(this.myForm)
+   })
+
   }
 
   get contacts() {
@@ -74,7 +82,12 @@ export class RformComponent implements OnInit {
   addContact() {
     this.contacts.push(this.fb.control(''));
   }
-
+  get firstname() {
+    return this.myForm.get('fname') as FormControl;
+  }
+  get ageCtl() {
+    return this.myForm.get('age') as FormControl;
+  }
   get shippingAddress() {
     return this.myForm.get('shippingAddresses') as FormArray;
   }
@@ -143,4 +156,22 @@ export class RformComponent implements OnInit {
   remove(i){
     this.shippingAddress.removeAt(i);
   }
+
+  loopCtrls(grp: FormGroup){
+    Object.keys(grp.controls).forEach((x) => {
+      const actrl  = grp.get(x)
+      if(actrl instanceof FormControl){
+        if(actrl && actrl.invalid){
+          console.log('key:',x,' value:', actrl.value)
+          for(const errorkey in actrl.errors){
+               actrl.errors[errorkey+"Msg"]=this.errorMessage [errorkey]
+          }
+      }
+      } else {
+        this.loopCtrls(<FormGroup>actrl)
+      }
+    })
+  }
+
+
 }

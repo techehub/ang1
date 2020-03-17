@@ -5,9 +5,16 @@
         {{item}}
     </option>
   </select>
-  <input type="text" formControlName="fname">
+  <input type="text" formControlName="fname" >
+  <div *ngIf="myForm.dirty && firstname.errors">
+    {{firstname.errors.requiredMsg}}
+  </div>
   <input type="text" formControlName="lname">
   <input type="text" formControlName="age">
+  <div *ngIf="myForm.dirty && ageCtl.errors">
+    {{ageCtl.errors.ageMsg}}
+    {{ageCtl.errors.requiredMsg}}
+  </div>
 
 
   <select  formControlName="addressType" >
